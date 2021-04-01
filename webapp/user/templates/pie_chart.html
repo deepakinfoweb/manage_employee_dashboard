@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyFirst App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="icon" href="{% static '/images/favicon.ico' %}" type="image/gif" sizes="16x16">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+    <style>
+        /* body {
+            background-image: url("https://png.pngtree.com/thumb_back/fw800/back_pic/03/77/53/7757c0230856ce2.jpg");
+        } */
+
+        .shade {
+            box-shadow: 0 15px 30px rgba(0, 0, 0, .3) !important;
+        }
+
+        .shade1 {
+            box-shadow: 0 .10rem .3rem rgba(0, 0, 0, .15) !important;
+        }
+
+        a,
+        a label {
+            cursor: pointer;
+        }
+
+        footer {
+            position: fixed;
+            height: 100px;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .bg-4 {
+            background-color: #2f2f2f;
+            /* Black Gray */
+            color: #fff;
+        }
+
+        .bg {
+            background-color: #fff;
+        }
+
+        .form-control,
+        label {
+            margin-bottom: 10px !important;
+        }
+
+        button {
+            background-color: #2f2f2f;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            opacity: 0.9;
+        }
+
+        button:hover {
+            opacity: 1;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-default" style=" background-color: #2f2f2f;">
+        <div class="container">
+            <div class="navbar-header align-center">
+                <a class="navbar-brand" style="color: #fff;">Myfirst App</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- First Container -->
+    <div class="container" style="margin-top: 4rem;">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 border bg col-sm shade" width="60%">
+                <canvas id="pie-chart"></canvas>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 4rem;">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 border bg col-sm" width="60%">
+                <button type="submit" class="form-control" style=" background-color: #2f2f2f; color: white;"><a
+                        href="{% url 'alluser' %}" style="color:white">GO Back</a></button>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script>
+
+        var config = {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: {{ Payload }},
+            backgroundColor: [
+                '#696969', '#808080', '#A9A9A9', '#C0C0C0', '#D3D3D3'
+            ],
+            label: 'Type'
+        }],
+            labels: ['Pending', 'Rejected', 'Confirmed']
+            },
+        options: {
+            responsive: true
+        }
+        };
+
+        window.onload = function () {
+            var ctx = document.getElementById('pie-chart').getContext('2d');
+            window.myPie = new Chart(ctx, config);
+        };
+
+    </script>
+</body>
+
+</html>
